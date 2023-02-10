@@ -9,11 +9,7 @@ func (d *Deck) InitToForty() {
 	d.deckType = DTBriscola
 	d.LblFn = getDeckLblForBriscola
 	d.Items = make([]DeckItem, 40)
-	for ix, item := range d.Items {
-		item.Lbl = d.GetDeckLbl(ix)
-		item.Value = ix
-		item.Rank = 0
-	}
+
 }
 
 func getDeckLblForBriscola(ix int) string {
