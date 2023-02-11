@@ -11,11 +11,28 @@ type DeckSpecializer interface {
 }
 
 type DeckItem struct {
-	Lbl   string
-	Rank  int
-	Value int
-	Suit  SuitType
-	Index int
+	lbl   string
+	rank  int
+	value int
+	suit  SuitType
+	index int
+}
+
+// DeckItem is readonly
+func (di *DeckItem) Value() int {
+	return di.value
+}
+
+func (di *DeckItem) Rank() int {
+	return di.rank
+}
+
+func (di *DeckItem) Suit() SuitType {
+	return di.suit
+}
+
+func (di *DeckItem) Lbl() string {
+	return di.lbl
 }
 
 type DeckType int
@@ -46,11 +63,11 @@ func (d *Deck) Initialize(size int, spec DeckSpecializer) {
 	d.items = make([]DeckItem, 0)
 	for ix := 0; ix < size; ix++ {
 		item := DeckItem{
-			Lbl:   spec.GetDeckLbl(ix),
-			Value: spec.GetDeckValue(ix),
-			Rank:  spec.GetDeckRank(ix),
-			Suit:  spec.GetDeckSuit(ix),
-			Index: ix,
+			lbl:   spec.GetDeckLbl(ix),
+			value: spec.GetDeckValue(ix),
+			rank:  spec.GetDeckRank(ix),
+			suit:  spec.GetDeckSuit(ix),
+			index: ix,
 		}
 		d.items = append(d.items, item)
 	}
@@ -78,7 +95,7 @@ func (d *Deck) GetSuit(lbl string) SuitType {
 
 func (d *Deck) find_on_lbl(lbl string) int {
 	for ix, v := range d.items {
-		if v.Lbl == lbl {
+		if v.lbl == lbl {
 			return ix
 		}
 	}
@@ -93,9 +110,9 @@ func (d *Deck) String() string {
 	res := ""
 	for ix, val := range d.items {
 		if ix > 0 {
-			res += "," + val.Lbl
+			res += "," + val.lbl
 		} else {
-			res = val.Lbl
+			res = val.lbl
 		}
 	}
 	return res
