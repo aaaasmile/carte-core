@@ -60,7 +60,7 @@ const (
 )
 
 func (d *Deck) Initialize(size int, spec DeckSpecializer) {
-	d.items = make([]DeckItem, 0)
+	d.items = make([]DeckItem, 0, size)
 	for ix := 0; ix < size; ix++ {
 		item := DeckItem{
 			lbl:   spec.GetDeckLbl(ix),
@@ -75,6 +75,10 @@ func (d *Deck) Initialize(size int, spec DeckSpecializer) {
 
 func (d *Deck) GetCard(lbl string) DeckItem {
 	ix := d.find_on_lbl(lbl)
+	return d.items[ix]
+}
+
+func (d *Deck) GetItem(ix int) DeckItem {
 	return d.items[ix]
 }
 
@@ -100,10 +104,6 @@ func (d *Deck) find_on_lbl(lbl string) int {
 		}
 	}
 	return -1
-}
-
-func (d *Deck) GetItem(ix int) DeckItem {
-	return d.items[ix]
 }
 
 func (d *Deck) String() string {
