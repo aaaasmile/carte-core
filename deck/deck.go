@@ -24,11 +24,15 @@ const (
 	DTRamino
 )
 
-func (d *Deck) initialize() {
-	for ix, item := range d.items {
-		item.Lbl = d.GetDeckLbl(ix)
-		item.Value = d.GetDeckValue(ix)
-		item.Rank = d.GetDeckRank(ix)
+func (d *Deck) initialize(size int) {
+	d.items = make([]DeckItem, 0)
+	for ix := 0; ix < size; ix++ {
+		item := DeckItem{
+			Lbl:   d.GetDeckLbl(ix),
+			Value: d.GetDeckValue(ix),
+			Rank:  d.GetDeckRank(ix),
+		}
+		d.items = append(d.items, item)
 	}
 }
 

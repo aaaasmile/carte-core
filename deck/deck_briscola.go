@@ -15,9 +15,7 @@ func (d *Deck) InitBriscola() {
 	d.lblFn = getDeckLblForBriscola
 	d.valueFn = getDeckValueForBriscola
 	d.rankFn = getDeckRankForBriscola
-
-	d.items = make([]DeckItem, 40)
-	d.initialize()
+	d.initialize(40)
 }
 
 func getDeckLblForBriscola(ix int) string {
