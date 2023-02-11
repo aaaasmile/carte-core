@@ -51,6 +51,30 @@ func (d *Deck) initialize(size int) {
 	}
 }
 
+func (d *Deck) GetRank(lbl string) int {
+	ix := d.find_on_lbl(lbl)
+	return d.rankFn(ix)
+}
+
+func (d *Deck) GetValue(lbl string) int {
+	ix := d.find_on_lbl(lbl)
+	return d.valueFn(ix)
+}
+
+func (d *Deck) GetSuite(lbl string) SuiteType {
+	ix := d.find_on_lbl(lbl)
+	return d.suiteFn(ix)
+}
+
+func (d *Deck) find_on_lbl(lbl string) int {
+	for ix, v := range d.items {
+		if v.Lbl == lbl {
+			return ix
+		}
+	}
+	return -1
+}
+
 func (d *Deck) GetDeckLbl(ix int) string {
 	return d.lblFn(ix)
 }
