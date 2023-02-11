@@ -14,9 +14,9 @@ type DeckType int
 type Deck struct {
 	Items    []DeckItem
 	deckType DeckType
-	LblFn    GetDeckLblFunc
-	ValueFn  GetDeckValRankFunc
-	RankFn   GetDeckValRankFunc
+	lblFn    GetDeckLblFunc
+	valueFn  GetDeckValRankFunc
+	rankFn   GetDeckValRankFunc
 }
 
 const (
@@ -24,7 +24,7 @@ const (
 	DTRamino
 )
 
-func (d *Deck) Initialize() {
+func (d *Deck) initialize() {
 	for ix, item := range d.Items {
 		item.Lbl = d.GetDeckLbl(ix)
 		item.Value = d.GetDeckValue(ix)
@@ -33,13 +33,13 @@ func (d *Deck) Initialize() {
 }
 
 func (d *Deck) GetDeckLbl(ix int) string {
-	return d.LblFn(ix)
+	return d.lblFn(ix)
 }
 
 func (d *Deck) GetDeckValue(ix int) int {
-	return d.ValueFn(ix)
+	return d.valueFn(ix)
 }
 
 func (d *Deck) GetDeckRank(ix int) int {
-	return d.RankFn(ix)
+	return d.rankFn(ix)
 }
