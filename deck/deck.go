@@ -2,10 +2,6 @@ package deck
 
 type SuitType int
 
-type GetDeckLblFunc func(int) string
-type GetDeckValRankFunc func(int) int
-type GetDeckSuitFunc func(int) SuitType
-
 type DeckSpecializer interface {
 	GetDeckLbl(int) string
 	GetDeckValue(int) int
@@ -87,21 +83,6 @@ func (d *Deck) find_on_lbl(lbl string) int {
 		}
 	}
 	return -1
-}
-
-func (d *Deck) GetDeckLbl(ix int) string {
-	return d.spec.GetDeckLbl(ix)
-}
-func (d *Deck) GetDeckValue(ix int) int {
-	return d.spec.GetDeckValue(ix)
-}
-
-func (d *Deck) GetDeckRank(ix int) int {
-	return d.spec.GetDeckRank(ix)
-}
-
-func (d *Deck) GetDeckSuit(ix int) SuitType {
-	return d.spec.GetDeckSuit(ix)
 }
 
 func (d *Deck) GetItem(ix int) DeckItem {

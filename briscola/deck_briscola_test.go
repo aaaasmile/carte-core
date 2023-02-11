@@ -2,6 +2,8 @@ package briscola
 
 import (
 	"testing"
+
+	"github.com/aaaasmile/carte-core/deck"
 )
 
 func TestDoSomeBriscola(t *testing.T) {
@@ -13,5 +15,10 @@ func TestDoSomeBriscola(t *testing.T) {
 	card := d.GetCard("_3s")
 	if card.Value != 10 {
 		t.Errorf("Tre di spade value is 10  instead of %d", card.Value)
+	}
+
+	card = d.GetCard("_2c")
+	if card.Suit != deck.Coppe {
+		t.Errorf("Due di coppe has suit  %d instead of ", card.Suit)
 	}
 }
