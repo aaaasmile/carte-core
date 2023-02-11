@@ -1,16 +1,16 @@
 package deck
 
-type SuiteTyp int
+type SuitType int
 
 type GetDeckLblFunc func(int) string
 type GetDeckValRankFunc func(int) int
-type GetDeckSuiteFunc func(int) SuiteTyp
+type GetDeckSuitFunc func(int) SuitType
 
 type DeckItem struct {
 	Lbl   string
 	Rank  int
 	Value int
-	Suite SuiteTyp
+	Suit  SuitType
 	Index int
 }
 
@@ -18,11 +18,11 @@ type DeckType int
 
 type Deck struct {
 	items    []DeckItem
-	deckType DeckType
-	lblFn    GetDeckLblFunc
-	valueFn  GetDeckValRankFunc
-	rankFn   GetDeckValRankFunc
-	suiteFn  GetDeckSuiteFunc
+	DeckType DeckType
+	LblFn    GetDeckLblFunc
+	ValueFn  GetDeckValRankFunc
+	RankFn   GetDeckValRankFunc
+	SuitFn   GetDeckSuitFunc
 }
 
 const (
@@ -31,20 +31,25 @@ const (
 )
 
 const (
-	Bastoni SuiteTyp = iota
+	Bastoni SuitType = iota
 	Coppe
 	Denari
 	Spade
+	Quadri
+	Fiori
+	Cuori
+	Picche
+	Jolly
 )
 
-func (d *Deck) initialize(size int) {
+func (d *Deck) Initialize(size int) {
 	d.items = make([]DeckItem, 0)
 	for ix := 0; ix < size; ix++ {
 		item := DeckItem{
 			Lbl:   d.GetDeckLbl(ix),
 			Value: d.GetDeckValue(ix),
 			Rank:  d.GetDeckRank(ix),
-			Suite: d.GetDeckSuit(ix),
+			Suit:  d.GetDeckSuit(ix),
 			Index: ix,
 		}
 		d.items = append(d.items, item)
@@ -53,17 +58,17 @@ func (d *Deck) initialize(size int) {
 
 func (d *Deck) GetRank(lbl string) int {
 	ix := d.find_on_lbl(lbl)
-	return d.rankFn(ix)
+	return d.RankFn(ix)
 }
 
 func (d *Deck) GetValue(lbl string) int {
 	ix := d.find_on_lbl(lbl)
-	return d.valueFn(ix)
+	return d.ValueFn(ix)
 }
 
-func (d *Deck) GetSuit(lbl string) SuiteTyp {
+func (d *Deck) GetSuit(lbl string) SuitType {
 	ix := d.find_on_lbl(lbl)
-	return d.suiteFn(ix)
+	return d.SuitFn(ix)
 }
 
 func (d *Deck) find_on_lbl(lbl string) int {
@@ -76,19 +81,19 @@ func (d *Deck) find_on_lbl(lbl string) int {
 }
 
 func (d *Deck) GetDeckLbl(ix int) string {
-	return d.lblFn(ix)
+	return d.LblFn(ix)
 }
 
 func (d *Deck) GetDeckValue(ix int) int {
-	return d.valueFn(ix)
+	return d.ValueFn(ix)
 }
 
 func (d *Deck) GetDeckRank(ix int) int {
-	return d.rankFn(ix)
+	return d.RankFn(ix)
 }
 
-func (d *Deck) GetDeckSuit(ix int) SuiteTyp {
-	return d.suiteFn(ix)
+func (d *Deck) GetDeckSuit(ix int) SuitType {
+	return d.SuitFn(ix)
 }
 
 func (d *Deck) GetItem(ix int) DeckItem {

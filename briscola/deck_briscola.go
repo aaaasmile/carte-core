@@ -1,4 +1,6 @@
-package deck
+package briscola
+
+import "github.com/aaaasmile/carte-core/deck"
 
 var _deck40Lbs = []string{"_Ab", "_2b", "_3b", "_4b", "_5b", "_6b", "_7b", "_Fb", "_Cb", "_Rb",
 	"_Ac", "_2c", "_3c", "_4c", "_5c", "_6c", "_7c", "_Fc", "_Cc", "_Rc",
@@ -10,13 +12,17 @@ var _briscPoints = []int{11, 0, 10, 0, 0, 0, 0, 2, 3, 4}
 // rank = { sei: 6, cav: 9, qua: 4, re: 10, set: 7, due: 2, cin: 5, asso: 12, fan: 8, tre: 11 };
 var _briscRank = []int{12, 2, 11, 4, 5, 6, 7, 8, 9, 10}
 
-func (d *Deck) InitBriscola() {
-	d.deckType = DTBriscola
-	d.lblFn = getDeckLblForBriscola
-	d.valueFn = getDeckValueForBriscola
-	d.rankFn = getDeckRankForBriscola
-	d.suiteFn = getDeckSuiteForBriscola
-	d.initialize(40)
+type DeckBriscola struct {
+	deck.Deck
+}
+
+func (d *DeckBriscola) Init() {
+	d.DeckType = deck.DTBriscola
+	d.LblFn = getDeckLblForBriscola
+	d.ValueFn = getDeckValueForBriscola
+	d.RankFn = getDeckRankForBriscola
+	d.SuitFn = getDeckSuitForBriscola
+	d.Initialize(40)
 }
 
 func getDeckLblForBriscola(ix int) string {
@@ -31,15 +37,15 @@ func getDeckRankForBriscola(ix int) int {
 	return _briscRank[ix%10]
 }
 
-func getDeckSuiteForBriscola(ix int) SuiteTyp {
+func getDeckSuitForBriscola(ix int) deck.SuitType {
 	if ix < 10 {
-		return Bastoni
+		return deck.Bastoni
 	}
 	if ix < 20 {
-		return Coppe
+		return deck.Coppe
 	}
 	if ix < 30 {
-		return Denari
+		return deck.Denari
 	}
-	return Spade
+	return deck.Spade
 }

@@ -1,12 +1,12 @@
-package deck
+package briscola
 
 import (
 	"testing"
 )
 
 func TestDoSomeBriscola(t *testing.T) {
-	d := Deck{}
-	d.InitBriscola()
+	d := DeckBriscola{}
+	d.Init()
 
 	t.Logf("Briscola deck: %s", d.String())
 }

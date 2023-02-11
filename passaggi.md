@@ -8,9 +8,8 @@ con la possibilità di avere lo stesso metodo (per esempio initialize) ma in pac
 differenti (per esempio Ramino e Briscola). Invece in Golang non funziona, il metodo 
 deve essere nello stesso package. In questo caso, però, il nome non può essere uguale.
 Quindi se voglio un mazzo per le carte da invido, devo dichiarare un initialize con un nome
-univoco. La specializzazione la ottengo poi con puntatori a funzioni. Non uso Interface in quanto
-non ho strutture differenti, ma i vari files tipo deck_briscola o deck_ramino 
-aggiungono solo nuovi metodi alla struttura Deck.
+univoco. La specializzazione la ottengo poi con puntatori a funzioni. 
+
 
 ## Unit Test
 Uso il file di test per i miei esperimenti anziché usare il main.go. Per
