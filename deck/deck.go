@@ -1,16 +1,16 @@
 package deck
 
-type SuiteType int
+type SuiteTyp int
 
 type GetDeckLblFunc func(int) string
 type GetDeckValRankFunc func(int) int
-type GetDeckSuiteFunc func(int) SuiteType
+type GetDeckSuiteFunc func(int) SuiteTyp
 
 type DeckItem struct {
 	Lbl   string
 	Rank  int
 	Value int
-	Suite SuiteType
+	Suite SuiteTyp
 	Index int
 }
 
@@ -31,7 +31,7 @@ const (
 )
 
 const (
-	Bastoni SuiteType = iota
+	Bastoni SuiteTyp = iota
 	Coppe
 	Denari
 	Spade
@@ -44,7 +44,7 @@ func (d *Deck) initialize(size int) {
 			Lbl:   d.GetDeckLbl(ix),
 			Value: d.GetDeckValue(ix),
 			Rank:  d.GetDeckRank(ix),
-			Suite: d.GetDeckSuite(ix),
+			Suite: d.GetDeckSuit(ix),
 			Index: ix,
 		}
 		d.items = append(d.items, item)
@@ -61,7 +61,7 @@ func (d *Deck) GetValue(lbl string) int {
 	return d.valueFn(ix)
 }
 
-func (d *Deck) GetSuite(lbl string) SuiteType {
+func (d *Deck) GetSuit(lbl string) SuiteTyp {
 	ix := d.find_on_lbl(lbl)
 	return d.suiteFn(ix)
 }
@@ -87,7 +87,7 @@ func (d *Deck) GetDeckRank(ix int) int {
 	return d.rankFn(ix)
 }
 
-func (d *Deck) GetDeckSuite(ix int) SuiteType {
+func (d *Deck) GetDeckSuit(ix int) SuiteTyp {
 	return d.suiteFn(ix)
 }
 

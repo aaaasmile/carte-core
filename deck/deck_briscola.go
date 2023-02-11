@@ -31,7 +31,7 @@ func getDeckRankForBriscola(ix int) int {
 	return _briscRank[ix%10]
 }
 
-func getDeckSuiteForBriscola(ix int) SuiteType {
+func getDeckSuiteForBriscola(ix int) SuiteTyp {
 	if ix < 10 {
 		return Bastoni
 	}
