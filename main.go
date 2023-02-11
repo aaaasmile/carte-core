@@ -8,7 +8,8 @@ import (
 
 func main() {
 	d := deck.Deck{}
-	d.InitToForty()
+	d.InitBriscola()
+	log.Println("Briscola deck: ", d.String())
 
 	log.Println("That's all folks")
 }

@@ -16,7 +16,7 @@ func (d *Deck) InitBriscola() {
 	d.valueFn = getDeckValueForBriscola
 	d.rankFn = getDeckRankForBriscola
 
-	d.Items = make([]DeckItem, 40)
+	d.items = make([]DeckItem, 40)
 	d.initialize()
 }
 
