@@ -15,6 +15,7 @@ func (d *Deck) InitBriscola() {
 	d.lblFn = getDeckLblForBriscola
 	d.valueFn = getDeckValueForBriscola
 	d.rankFn = getDeckRankForBriscola
+	d.suiteFn = getDeckSuiteForBriscola
 	d.initialize(40)
 }
 
@@ -28,4 +29,17 @@ func getDeckValueForBriscola(ix int) int {
 
 func getDeckRankForBriscola(ix int) int {
 	return _briscRank[ix%10]
+}
+
+func getDeckSuiteForBriscola(ix int) SuiteType {
+	if ix < 10 {
+		return Bastoni
+	}
+	if ix < 20 {
+		return Coppe
+	}
+	if ix < 30 {
+		return Denari
+	}
+	return Spade
 }
