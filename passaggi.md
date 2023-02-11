@@ -18,3 +18,14 @@ del Deck uso Interface nella funzione Initialize.
 Uso il file di test per i miei esperimenti anziché usare il main.go. Per
 avere l'output del test in Visual Code anziché il semplice OK, bisogna cambiare i settings
 nel workspace (vedi file settings.json)
+
+## Stringer
+Ho avuto difficoltà ad avere il mio stringer.exe che veniva creato al momento
+dell'istallazione del package. Per averlo sono andato nella directory
+C:\Users\igors\go\pkg\mod\golang.org\x\tools@v0.6.0\cmd\stringer
+e da lì ho lanciato go build che mi ha creato stringer.exe che poi ho copiato 
+manualmente in  C:\Users\igors\go\bin
+A quanto pare con il comando: 
+
+    go install golang.org/x/tools/cmd/goimports@latest
+vengono installati solo i sorgenti.

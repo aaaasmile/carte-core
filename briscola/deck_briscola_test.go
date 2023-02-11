@@ -19,6 +19,6 @@ func TestDoSomeBriscola(t *testing.T) {
 
 	card = d.GetCard("_2c")
 	if card.Suit() != deck.Coppe {
-		t.Errorf("Due di coppe has suit  %d instead of coppe", card.Suit())
+		t.Errorf("Due di coppe has suit  %s instead of coppe", card.Suit().String())
 	}
 }
