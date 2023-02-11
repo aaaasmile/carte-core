@@ -18,20 +18,20 @@ type DeckRamino struct {
 }
 
 func (d *DeckRamino) Init() {
-	d.DeckType = deck.DTRamino
-	d.LblFn = getDeckLblRamino
-	d.ValueFn = getDeckValueRamino
-	d.RankFn = getDeckRankRamino
-	d.SuitFn = getDeckSuitRamino
-	d.Initialize(108)
+
+	d.Initialize(108, d)
 }
 
-func getDeckLblRamino(ixf int) string {
+func (d *DeckRamino) GetDeckType() deck.DeckType {
+	return deck.DTRamino
+}
+
+func (d *DeckRamino) GetDeckLbl(ixf int) string {
 	ix := ixf % 54
 	return _deckLbs[ix]
 }
 
-func getDeckValueRamino(ixf int) int {
+func (d *DeckRamino) GetDeckValue(ixf int) int {
 	ix := ixf % 54
 	if ix >= 52 {
 		return 25
@@ -39,7 +39,7 @@ func getDeckValueRamino(ixf int) int {
 	return _points[ix%13]
 }
 
-func getDeckRankRamino(ixf int) int {
+func (d *DeckRamino) GetDeckRank(ixf int) int {
 	ix := ixf % 54
 	if ix >= 52 {
 		return 0
@@ -47,7 +47,7 @@ func getDeckRankRamino(ixf int) int {
 	return _rank[ix%13]
 }
 
-func getDeckSuitRamino(ixf int) deck.SuitType {
+func (d *DeckRamino) GetDeckSuit(ixf int) deck.SuitType {
 	ix := ixf % 54
 	if ix < 13 {
 		return deck.Quadri

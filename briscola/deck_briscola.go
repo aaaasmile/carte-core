@@ -17,27 +17,26 @@ type DeckBriscola struct {
 }
 
 func (d *DeckBriscola) Init() {
-	d.DeckType = deck.DTBriscola
-	d.LblFn = getDeckLblForBriscola
-	d.ValueFn = getDeckValueForBriscola
-	d.RankFn = getDeckRankForBriscola
-	d.SuitFn = getDeckSuitForBriscola
-	d.Initialize(40)
+	d.Initialize(40, d)
 }
 
-func getDeckLblForBriscola(ix int) string {
+func (d *DeckBriscola) GetDeckType() deck.DeckType {
+	return deck.DTBriscola
+}
+
+func (d *DeckBriscola) GetDeckLbl(ix int) string {
 	return _deck40Lbs[ix]
 }
 
-func getDeckValueForBriscola(ix int) int {
+func (d *DeckBriscola) GetDeckValue(ix int) int {
 	return _briscPoints[ix%10]
 }
 
-func getDeckRankForBriscola(ix int) int {
+func (d *DeckBriscola) GetDeckRank(ix int) int {
 	return _briscRank[ix%10]
 }
 
-func getDeckSuitForBriscola(ix int) deck.SuitType {
+func (d *DeckBriscola) GetDeckSuit(ix int) deck.SuitType {
 	if ix < 10 {
 		return deck.Bastoni
 	}

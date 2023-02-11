@@ -6,6 +6,14 @@ type GetDeckLblFunc func(int) string
 type GetDeckValRankFunc func(int) int
 type GetDeckSuitFunc func(int) SuitType
 
+type DeckSpecializer interface {
+	GetDeckLbl(int) string
+	GetDeckValue(int) int
+	GetDeckRank(int) int
+	GetDeckSuit(int) SuitType
+	GetDeckType() DeckType
+}
+
 type DeckItem struct {
 	Lbl   string
 	Rank  int
@@ -17,12 +25,8 @@ type DeckItem struct {
 type DeckType int
 
 type Deck struct {
-	items    []DeckItem
-	DeckType DeckType
-	LblFn    GetDeckLblFunc
-	ValueFn  GetDeckValRankFunc
-	RankFn   GetDeckValRankFunc
-	SuitFn   GetDeckSuitFunc
+	items []DeckItem
+	spec  DeckSpecializer
 }
 
 const (
@@ -42,33 +46,38 @@ const (
 	Jolly
 )
 
-func (d *Deck) Initialize(size int) {
+func (d *Deck) Initialize(size int, spec DeckSpecializer) {
 	d.items = make([]DeckItem, 0)
 	for ix := 0; ix < size; ix++ {
 		item := DeckItem{
-			Lbl:   d.GetDeckLbl(ix),
-			Value: d.GetDeckValue(ix),
-			Rank:  d.GetDeckRank(ix),
-			Suit:  d.GetDeckSuit(ix),
+			Lbl:   spec.GetDeckLbl(ix),
+			Value: spec.GetDeckValue(ix),
+			Rank:  spec.GetDeckRank(ix),
+			Suit:  spec.GetDeckSuit(ix),
 			Index: ix,
 		}
 		d.items = append(d.items, item)
 	}
 }
 
+func (d *Deck) GetCard(lbl string) DeckItem {
+	ix := d.find_on_lbl(lbl)
+	return d.items[ix]
+}
+
 func (d *Deck) GetRank(lbl string) int {
 	ix := d.find_on_lbl(lbl)
-	return d.RankFn(ix)
+	return d.spec.GetDeckRank(ix)
 }
 
 func (d *Deck) GetValue(lbl string) int {
 	ix := d.find_on_lbl(lbl)
-	return d.ValueFn(ix)
+	return d.spec.GetDeckValue(ix)
 }
 
 func (d *Deck) GetSuit(lbl string) SuitType {
 	ix := d.find_on_lbl(lbl)
-	return d.SuitFn(ix)
+	return d.spec.GetDeckSuit(ix)
 }
 
 func (d *Deck) find_on_lbl(lbl string) int {
@@ -81,19 +90,18 @@ func (d *Deck) find_on_lbl(lbl string) int {
 }
 
 func (d *Deck) GetDeckLbl(ix int) string {
-	return d.LblFn(ix)
+	return d.spec.GetDeckLbl(ix)
 }
-
 func (d *Deck) GetDeckValue(ix int) int {
-	return d.ValueFn(ix)
+	return d.spec.GetDeckValue(ix)
 }
 
 func (d *Deck) GetDeckRank(ix int) int {
-	return d.RankFn(ix)
+	return d.spec.GetDeckRank(ix)
 }
 
 func (d *Deck) GetDeckSuit(ix int) SuitType {
-	return d.SuitFn(ix)
+	return d.spec.GetDeckSuit(ix)
 }
 
 func (d *Deck) GetItem(ix int) DeckItem {

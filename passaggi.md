@@ -9,7 +9,10 @@ differenti (per esempio Ramino e Briscola). Invece in Golang non funziona, il me
 deve essere nello stesso package. In questo caso, però, il nome non può essere uguale.
 Quindi se voglio un mazzo per le carte da invido, devo dichiarare un initialize con un nome
 univoco. La specializzazione la ottengo poi con puntatori a funzioni. 
-
+Il trucco qui è quello di dichiare una nuova struttura (esempio DeckBriscola) che 
+contiene la struttura Deck in formato anonimo, come in C. Ora ho a disposizione tutti
+i metodi della struttura Deck e definirne di nuovi. Per cambiare la funzionalità di quelli
+del Deck uso Interface nella funzione Initialize. 
 
 ## Unit Test
 Uso il file di test per i miei esperimenti anziché usare il main.go. Per
